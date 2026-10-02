@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "outputDirectory": "public",
+  "functions": {
+    "api/government-notices/info.js": {
+      "maxDuration": 60
+    }
+  },
+  "routes": [
+    {
+      "src": "/government-notices/info",
+      "dest": "/api/government-notices/info.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ]
+}

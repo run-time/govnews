@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="A JSON endpoint for recent U.S. Federal Register documents."
+    />
+    <title>U.S. Government Notices API</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        font-family: system-ui, sans-serif;
+        line-height: 1.55;
+      }
+      body {
+        max-width: 760px;
+        margin: 3rem auto;
+        padding: 0 1.25rem;
+      }
+      code,
+      pre {
+        font-family: ui-monospace, monospace;
+      }
+      code {
+        overflow-wrap: anywhere;
+      }
+      pre {
+        overflow-x: auto;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        background: color-mix(in srgb, CanvasText 8%, Canvas);
+      }
+      a {
+        color: #4b9cff;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>U.S. Government Notices API</h1>
+      <p>
+        Fetch Federal Register documents as JSON. The API returns document
+        records published by the U.S. government, ordered newest first.
+      </p>
+
+      <h2>Endpoint</h2>
+      <p><a href="/info"><code>GET /info</code></a></p>
+      <p>
+        With no options, this returns the latest 30 documents. Each response
+        has a <code>count</code> field and a <code>notices</code> array of
+        Federal Register records.
+      </p>
+      <pre><code>{
+  "count": 30,
+  "notices": [{ "title": "...", "publication_date": "..." }]
+}</code></pre>
+
+      <h2>Options</h2>
+      <ul>
+        <li>
+          <code>last</code>: return that many latest documents (1–1000).
+          Example: <a href="/info?last=10"><code>/info?last=10</code></a>
+        </li>
+        <li>
+          <code>start</code> and <code>end</code>: return every document
+          published within the inclusive date range, formatted as
+          <code>YYYY-MM-DD</code>. Example:
+          <a href="/info?start=2026-09-01&amp;end=2026-10-01"><code>/info?start=2026-09-01&amp;end=2026-10-01</code></a>
+        </li>
+      </ul>
+      <p>
+        Date range results are paginated through the Federal Register API.
+        Provide both dates; <code>last</code> only applies when no date range
+        is supplied. Invalid options return a JSON error with HTTP 400.
+      </p>
+      <p>
+        Source: <a href="https://www.federalregister.gov/developers/documentation/api/v1">Federal Register API</a>.
+      </p>
+    </main>
+  </body>
+</html>
